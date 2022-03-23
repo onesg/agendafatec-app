@@ -1,20 +1,33 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+//  importações manuais (colocar entre as importações existentes)
+import { MatButtonModule } from '@angular/material/button';
+import { ContatoService } from './contato.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContatoComponent } from './contato/contato.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ContatoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+
+    //  colocar antes do BrowserAnimationsModule
+    MatButtonModule,
+
     BrowserAnimationsModule
   ],
-  providers: [],
+  //  serviços sempre serão adicionados aos providers
+  providers: [
+    ContatoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
