@@ -1,0 +1,48 @@
+// instalar angular CLI
+npm install -g @angular/cli
+
+
+// criar projeto
+ng new my-first-project
+
+
+// iniciar o projeto
+ng serve --open
+
+
+// environnments
+
+
+obs : todos componentes do material tera que ser importado ao app.modele
+
+
+
+// instalar o material ao projeto
+ng add @angular/material
+
+
+// criar um componente contato sem arquivos de teste
+ng g c --skipTests=true contato
+
+// criar serviço contato sme arquivos de teste
+ng g s --skipTests=true contato
+
+- serviço nao entra no declarations, imports mas sim nos providers
+
+- serviços sempre na providers
+
+
+
+Adicionado botões do material e criado um componente e serviço contato
+
+
+
+
+
+
+
+
+
+
+
+
