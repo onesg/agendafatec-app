@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 //  importações manuais (colocar entre as importações existentes)
+
+import { HttpClientModule } from '@angular/common/http'; // POSSIBILITA ENVIAR REQ POST, GET ETC.
+
+/* IMPORTAÇÕES DA VIEW */
 import { MatButtonModule } from '@angular/material/button';
 import { ContatoService } from './contato.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,6 +29,8 @@ import { ContatoComponent } from './contato/contato.component';
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,
+
+    HttpClientModule,
 
     BrowserAnimationsModule
   ],
