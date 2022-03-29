@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ContatoService } from '../contato.service';
 import { Contato } from './contato';
 
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-contato',
   templateUrl: './contato.component.html',
@@ -9,20 +11,27 @@ import { Contato } from './contato';
 })
 export class ContatoComponent implements OnInit {
 
-  constructor(private service: ContatoService) { }
+  /* GRUPO DE COMPONENTES */
+  formulario!: FormGroup; /* (!) SERVE PARA DIZER QUE A VARIÁVEL "PODE" SER USADA ALGUM DIA */
 
+  constructor(private service: ContatoService,
+    private fb: FormBuilder) { }
+
+  /* ASSIM QUE ABRIR A PÁGINA, O "ngOnInit" SERÁ EXECUTADO */
   ngOnInit(): void {
 
-    /* OBJETO CONTATO */
-    const c: Contato = new Contato();
-    c.nome = "Gabriel";
-    c.email = "gabriel@test.com";
-    c.favorito = true;
-
-    this.service.save(c).subscribe( resposta => {
-      console.log(resposta);
+    this.formulario = this.fb.group({
+      form_nome: ['', Validators.required], /* POR PADRÃO, UM VALOR VAZIO SERÁ PASSADO. */
+      form_email: ['', Validators.required] /* "required" É UM CAMPO OBRIGATÓRIO */
     })
 
+  }
+
+  submit(){
+    console.log(this.formulario.value);
+    /*this.service.save(c).subscribe( resposta => {
+      console.log(resposta);
+    })*/
   }
 
 }

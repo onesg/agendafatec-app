@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ContatoService } from './contato.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { ContatoComponent } from './contato/contato.component';
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,
+    ReactiveFormsModule,
 
     HttpClientModule,
 
