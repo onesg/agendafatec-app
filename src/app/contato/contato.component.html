@@ -20,7 +20,8 @@
   </mat-form-field>
 
   <!-- BOTAO SALVAR -->
-  <button mat-raised-button color="primary">Salvar</button>
+  <!-- FICARÁ DESABILITADO ATÉ QUE O FORMULÁRIO ESTEJA VÁLIDO -->
+  <button [disabled]="!formulario.valid" mat-raised-button color="primary">Salvar</button>
 
 </form>
 <!-- FIM FORMULARIO -->

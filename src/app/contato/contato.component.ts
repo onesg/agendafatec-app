@@ -21,17 +21,32 @@ export class ContatoComponent implements OnInit {
   ngOnInit(): void {
 
     this.formulario = this.fb.group({
-      form_nome: ['', Validators.required], /* POR PADRÃO, UM VALOR VAZIO SERÁ PASSADO. */
-      form_email: ['', Validators.required] /* "required" É UM CAMPO OBRIGATÓRIO */
+      form_nome: ['', Validators.required], /* POR PADRÃO, UM VALOR VAZIO SERÁ PASSADO */
+      form_email: ['', [Validators.required, Validators.email]] /* CAMPO ORBIGATÓRIO E VALIDAÇÃO DE EMAIL */
     })
 
   }
 
+  /* MÉTODO SUBMIT */
   submit(){
+
+    const errorNomeRequired = this.formulario.controls.form_nome.errors.required;
+    const errorEmailInvalid = this.formulario.controls.form_email.errors.email;
+
+    /* MOSTRAR AS INFORMAÇÕES RECEBIDAS DO FORMULÁRIO */
     console.log(this.formulario.value);
+
+    /* VERIFICA SE O FORMULÁRIO É VÁLIDO */
+    const isValid = this.formulario.valid;
+
+    /* MOSTRA NO CONSOLE A VALIDADE DO FORMULÁRIO */
+    console.log("É válido: ", isValid);
+
+
     /*this.service.save(c).subscribe( resposta => {
       console.log(resposta);
     })*/
+
   }
 
 }
