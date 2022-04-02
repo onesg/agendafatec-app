@@ -14,35 +14,42 @@ export class ContatoComponent implements OnInit {
   /* GRUPO DE COMPONENTES */
   formulario!: FormGroup; /* (!) SERVE PARA DIZER QUE A VARIÁVEL "PODE" SER USADA ALGUM DIA */
 
+  /* VETOR COM A LISTA DE CONTATOS */
+  contato: Contato[] = [];
+
   constructor(private service: ContatoService,
     private fb: FormBuilder) { }
 
   /* ASSIM QUE ABRIR A PÁGINA, O "ngOnInit" SERÁ EXECUTADO */
   ngOnInit(): void {
 
+    /* CHAMANDO FORMULÁRIO */
+    this.createForms();
+
+  }
+
+  /* MÉTODO PARA CRIAR FORMULÁRIO */
+  createForms(){
     this.formulario = this.fb.group({
       form_nome: ['', Validators.required], /* POR PADRÃO, UM VALOR VAZIO SERÁ PASSADO */
       form_email: ['', [Validators.required, Validators.email]] /* CAMPO ORBIGATÓRIO E VALIDAÇÃO DE EMAIL */
-    })
-
+    });
   }
 
   /* MÉTODO SUBMIT */
   submit(){
 
-    /* MOSTRAR AS INFORMAÇÕES RECEBIDAS DO FORMULÁRIO */
-    console.log(this.formulario.value);
+    /* PEGANDO OS VALORES DO FORMULÁRIO */
+    const formValues = this.formulario.value;
 
-    /* VERIFICA SE O FORMULÁRIO É VÁLIDO */
-    const isValid = this.formulario.valid;
+    /* CRIANDO OBJETCO C DE CONTATO, INSTANCIANDO E SALVANDO AS INFORMAÇÕES */
+    const c : Contato = new Contato(formValues.nome, formValues.email);
 
-    /* MOSTRA NO CONSOLE A VALIDADE DO FORMULÁRIO */
-    console.log("É válido: ", isValid);
-
-
-    /*this.service.save(c).subscribe( resposta => {
-      console.log(resposta);
-    })*/
+    /* EXECUTANDO O MÉTODO SAVE MANDANDO O OBJETO PREENCHIDO */
+    this.service.save(c).subscribe( resposta => {
+      console.log(resposta); /* EXIBINDO A REPOSTA NO CONSOLE */
+      this.formulario.reset; /* LIMPANDO OS VALORES */
+    })
 
   }
 
