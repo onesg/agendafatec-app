@@ -15,7 +15,7 @@ export class ContatoComponent implements OnInit {
   formulario!: FormGroup; /* (!) SERVE PARA DIZER QUE A VARIÁVEL "PODE" SER USADA ALGUM DIA */
 
   /* VETOR COM A LISTA DE CONTATOS */
-  contato: Contato[] = [];
+  contatos: Contato[] = [];
 
   constructor(private service: ContatoService,
     private fb: FormBuilder) { }
@@ -43,11 +43,12 @@ export class ContatoComponent implements OnInit {
     const formValues = this.formulario.value;
 
     /* CRIANDO OBJETCO C DE CONTATO, INSTANCIANDO E SALVANDO AS INFORMAÇÕES */
-    const c : Contato = new Contato(formValues.nome, formValues.email);
+    const c : Contato = new Contato(formValues.form_nome, formValues.form_email);
 
     /* EXECUTANDO O MÉTODO SAVE MANDANDO O OBJETO PREENCHIDO */
     this.service.save(c).subscribe( resposta => {
-      console.log(resposta); /* EXIBINDO A REPOSTA NO CONSOLE */
+      this.contatos.push(resposta);
+      console.log(this.contatos); /* EXIBINDO A REPOSTA NO CONSOLE */
       this.formulario.reset; /* LIMPANDO OS VALORES */
     })
 
