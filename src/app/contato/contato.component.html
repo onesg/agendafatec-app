@@ -4,41 +4,56 @@
 </mat-toolbar>
 <!-- FIM BARRA DE FERRAMENTAS -->
 
-<!-- INICIO FORMULARIO -->
-<form [formGroup]="formulario" (ngSubmit)="submit()">
+<!-- INICIO TABS DE NAVEGAÇÃO -->
+<mat-tab-group>
 
-  <!-- CAMPO NOME -->
-  <mat-form-field class="full-width">
-    <mat-label>Nome</mat-label>
-    <input formControlName="form_nome" matInput placeholder="Digite o nome" value="">
-  </mat-form-field>
+  <!-- INICIO ABA LISTA DE CONTATOS -->
+  <mat-tab label="Contatos"> [Lista de contatos] </mat-tab>
 
-  <!-- VÁLIDAÇÃO DO CAMPO NOME -->
-  <div *ngIf="formulario.controls.form_nome.errors && !formulario.controls.form_nome.pristine">
-    <!-- obs: "pristine" É VERDADEIRO CASO O USUÁRIO NEM CLICAR NO CAMPO -->
-    <div *ngIf="formulario.controls.form_nome.errors.required">
-      Campo nome é obrigatório!
-    </div>
-  </div>
+  <!-- INICIO ABA NOVO CONTATO -->
+  <mat-tab label="Novo">
 
-  <!-- CAMPO E-MAIL -->
-  <mat-form-field class="full-width">
-    <mat-label>E-mail</mat-label>
-    <input formControlName="form_email" matInput placeholder="Digite o e-mail" value="">
-  </mat-form-field>
+    <!-- INICIO FORMULARIO -->
+    <form [formGroup]="formulario" (ngSubmit)="submit()">
 
-  <!-- VÁLIDAÇÃO DO CAMPO EMAIL -->
-  <div *ngIf="formulario.controls.form_email.errors && formulario.controls.form_email.dirty">
-    <div *ngIf="formulario.controls.form_email.errors.required">
-      Campo e-mail é obrigatório!
-    </div>
-    <div *ngIf="formulario.controls.form_email.errors.email">
-      E-mail é inválido!
-    </div>
-  </div>
+      <!-- CAMPO NOME -->
+      <mat-form-field class="full-width">
+        <mat-label>Nome</mat-label>
+        <input formControlName="form_nome" matInput placeholder="Digite o nome" value="">
+      </mat-form-field>
 
-  <!-- BOTAO SALVAR -->
-  <button mat-raised-button color="primary">Salvar</button>
+      <!-- VÁLIDAÇÃO DO CAMPO NOME -->
+      <div *ngIf="formulario.controls.form_nome.errors && !formulario.controls.form_nome.pristine">
+        <!-- obs: "pristine" É VERDADEIRO CASO O USUÁRIO NEM CLICAR NO CAMPO -->
+        <div *ngIf="formulario.controls.form_nome.errors.required">
+          Campo nome é obrigatório!
+        </div>
+      </div>
 
-</form>
-<!-- FIM FORMULARIO -->
+      <!-- CAMPO E-MAIL -->
+      <mat-form-field class="full-width">
+        <mat-label>E-mail</mat-label>
+        <input formControlName="form_email" matInput placeholder="Digite o e-mail" value="">
+      </mat-form-field>
+
+      <!-- VÁLIDAÇÃO DO CAMPO EMAIL -->
+      <div *ngIf="formulario.controls.form_email.errors && formulario.controls.form_email.dirty">
+        <div *ngIf="formulario.controls.form_email.errors.required">
+          Campo e-mail é obrigatório!
+        </div>
+        <div *ngIf="formulario.controls.form_email.errors.email">
+          E-mail é inválido!
+        </div>
+      </div>
+
+      <!-- BOTAO SALVAR -->
+      <button mat-raised-button color="primary">Salvar</button>
+
+    </form>
+    <!-- FIM FORMULARIO -->
+
+  </mat-tab>
+  <!-- FIM ABA NOVO CONTATO -->
+
+</mat-tab-group>
+<!-- FIM TABS DE NAVEGAÇÃO -->
