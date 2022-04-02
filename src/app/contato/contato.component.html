@@ -13,15 +13,32 @@
     <input formControlName="form_nome" matInput placeholder="Digite o nome" value="">
   </mat-form-field>
 
+  <!-- VÁLIDAÇÃO DO CAMPO NOME -->
+  <div *ngIf="formulario.controls.form_nome.errors && !formulario.controls.form_nome.pristine">
+    <!-- obs: "pristine" É VERDADEIRO CASO O USUÁRIO NEM CLICAR NO CAMPO -->
+    <div *ngIf="formulario.controls.form_nome.errors.required">
+      Campo nome é obrigatório!
+    </div>
+  </div>
+
   <!-- CAMPO E-MAIL -->
   <mat-form-field class="full-width">
     <mat-label>E-mail</mat-label>
     <input formControlName="form_email" matInput placeholder="Digite o e-mail" value="">
   </mat-form-field>
 
+  <!-- VÁLIDAÇÃO DO CAMPO EMAIL -->
+  <div *ngIf="formulario.controls.form_email.errors && formulario.controls.form_email.dirty">
+    <div *ngIf="formulario.controls.form_email.errors.required">
+      Campo e-mail é obrigatório!
+    </div>
+    <div *ngIf="formulario.controls.form_email.errors.email">
+      E-mail é inválido!
+    </div>
+  </div>
+
   <!-- BOTAO SALVAR -->
-  <!-- FICARÁ DESABILITADO ATÉ QUE O FORMULÁRIO ESTEJA VÁLIDO -->
-  <button [disabled]="!formulario.valid" mat-raised-button color="primary">Salvar</button>
+  <button mat-raised-button color="primary">Salvar</button>
 
 </form>
 <!-- FIM FORMULARIO -->

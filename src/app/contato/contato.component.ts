@@ -30,9 +30,6 @@ export class ContatoComponent implements OnInit {
   /* MÉTODO SUBMIT */
   submit(){
 
-    const errorNomeRequired = this.formulario.controls.form_nome.errors.required;
-    const errorEmailInvalid = this.formulario.controls.form_email.errors.email;
-
     /* MOSTRAR AS INFORMAÇÕES RECEBIDAS DO FORMULÁRIO */
     console.log(this.formulario.value);
 
