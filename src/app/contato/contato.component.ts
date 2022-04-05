@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContatoService } from '../contato.service';
 import { Contato } from './contato';
 
-import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contato',
@@ -18,7 +18,7 @@ export class ContatoComponent implements OnInit {
   contatos: Contato[] = [];
 
   /* VETOR COM AS COLUNAS DA TABELA DE CONTATOS */
-  colunas = ['id','nome','email','favorito'];
+  colunas = ['id', 'nome', 'email', 'favorito'];
 
   constructor(private service: ContatoService,
     private fb: FormBuilder) { }
@@ -29,10 +29,13 @@ export class ContatoComponent implements OnInit {
     /* CHAMANDO FORMULÁRIO */
     this.createForms();
 
+    /* CHAMANDO MÉTODO findAll */
+    this.findAll();
+
   }
 
   /* MÉTODO PARA CRIAR FORMULÁRIO */
-  createForms(){
+  createForms() {
     this.formulario = this.fb.group({
       form_nome: ['', Validators.required], /* POR PADRÃO, UM VALOR VAZIO SERÁ PASSADO */
       form_email: ['', [Validators.required, Validators.email]] /* CAMPO ORBIGATÓRIO E VALIDAÇÃO DE EMAIL */
@@ -40,21 +43,28 @@ export class ContatoComponent implements OnInit {
   }
 
   /* MÉTODO SUBMIT */
-  submit(){
+  submit() {
 
     /* PEGANDO OS VALORES DO FORMULÁRIO */
     const formValues = this.formulario.value;
 
     /* CRIANDO OBJETCO C DE CONTATO, INSTANCIANDO E SALVANDO AS INFORMAÇÕES */
-    const c : Contato = new Contato(formValues.form_nome, formValues.form_email);
+    const c: Contato = new Contato(formValues.form_nome, formValues.form_email);
 
     /* EXECUTANDO O MÉTODO SAVE MANDANDO O OBJETO PREENCHIDO */
-    this.service.save(c).subscribe( resposta => {
+    this.service.save(c).subscribe(resposta => {
       this.contatos.push(resposta);
       console.log(this.contatos); /* EXIBINDO A REPOSTA NO CONSOLE */
       this.formulario.reset; /* LIMPANDO OS VALORES */
     })
 
+  }
+
+  /* MÉTODO PARA LISTAR OS CONTATOS */
+  findAll() {
+    this.service.list().subscribe(resposta => {
+      this.contatos = resposta;
+    })
   }
 
 }
