@@ -16,8 +16,14 @@ export class ContatoService {
     private http: HttpClient
   ) { }
 
+  /* SERVIÇO PARA SALVAR AS INFORMAÇÕES NO BANCO PELA API */
   save(contato: Contato): Observable<Contato> {
     return this.http.post<Contato>(this.url, contato);
+  }
+
+  /* SERVIÇO PARA LISTAR AS INFORMAÇÕES DO BANCO PELA API */
+  list(): Observable<Contato[]> {
+    return this.http.get<any>(this.url);
   }
 
 }
