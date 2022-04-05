@@ -31,6 +31,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 https://demoiselle.gitbooks.io/documentacao-frontend/content/formularios.html
 https://material.angular.io/components/categories
 https://angular.io/
-
+https://materialdesignicons.com/
 
 
