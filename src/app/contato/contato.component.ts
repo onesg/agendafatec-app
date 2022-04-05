@@ -17,6 +17,9 @@ export class ContatoComponent implements OnInit {
   /* VETOR COM A LISTA DE CONTATOS */
   contatos: Contato[] = [];
 
+  /* VETOR COM AS COLUNAS DA TABELA DE CONTATOS */
+  colunas = ['id','nome','email','favorito'];
+
   constructor(private service: ContatoService,
     private fb: FormBuilder) { }
 
