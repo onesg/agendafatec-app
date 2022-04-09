@@ -36,4 +36,9 @@ export class ContatoService {
     return this.http.delete(`${this.url}/${contato.id}`);
   }
 
+  /* SERVIÇO PARA UPLOAD DE FOTO PELA API */
+  upload(contato: Contato, formData: FormData): Observable<any> {
+    return this.http.put(`${this.url}/${contato.id}/foto`, formData);
+  }
+
 }
