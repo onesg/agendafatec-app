@@ -26,4 +26,14 @@ export class ContatoService {
     return this.http.get<any>(this.url);
   }
 
+  /* SERVIÇO PARA FAVORITAR CONTATO PELA API */
+  favorite(contato: Contato): Observable<any> {
+    return this.http.patch(`${this.url}/${contato.id}/favorito`, null);
+  }
+
+  /* SERVIÇO PARA DELETAR UM CONTAO PELA API */
+  delete(contato: Contato): Observable<any> {
+    return this.http.delete(`${this.url}/${contato.id}`);
+  }
+
 }
