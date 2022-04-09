@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ContatoService } from '../contato.service';
 import { Contato } from './contato';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgControlStatus } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contato',
@@ -18,10 +19,12 @@ export class ContatoComponent implements OnInit {
   contatos: Contato[] = [];
 
   /* VETOR COM AS COLUNAS DA TABELA DE CONTATOS */
-  colunas = ['id', 'nome', 'email', 'favorito'];
+  colunas = ['id', 'nome', 'email', 'favorito', 'excluir'];
 
-  constructor(private service: ContatoService,
-    private fb: FormBuilder) { }
+  constructor(
+    private service: ContatoService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar) { }
 
   /* ASSIM QUE ABRIR A PÁGINA, O "ngOnInit" SERÁ EXECUTADO */
   ngOnInit(): void {
@@ -53,9 +56,12 @@ export class ContatoComponent implements OnInit {
 
     /* EXECUTANDO O MÉTODO SAVE MANDANDO O OBJETO PREENCHIDO */
     this.service.save(c).subscribe(resposta => {
-      this.contatos.push(resposta);
-      console.log(this.contatos); /* EXIBINDO A REPOSTA NO CONSOLE */
+      this.snackBar.open('Contato adicionado com sucesso!', 'Sucesso', {
+        duration: 2000
+      });
       this.formulario.reset; /* LIMPANDO OS VALORES */
+      let lista: Contato[] = [...this.contatos, resposta];
+      this.contatos = lista;
     })
 
   }
@@ -65,6 +71,23 @@ export class ContatoComponent implements OnInit {
     this.service.list().subscribe(resposta => {
       this.contatos = resposta;
     })
+  }
+
+  /* MÉTODO PARA FAVORITAR CONTATOS */ /* NAO ESTA FUNCIONANDO */
+  favorite(contato: Contato) {
+    this.service.favorite(contato).subscribe(resposta => {
+      contato.favorito = !contato.favorito;
+      //console.log(contato.favorito);
+    })
+  }
+
+  /* MÉTODO PARA DELETAR CONTATO */
+  delete(contato: Contato) {
+    if (window.confirm('Deseja realmente excluir este contato ?')) {
+      this.service.delete(contato).subscribe(resposta => {
+        this.findAll();
+      })
+    }
   }
 
 }
