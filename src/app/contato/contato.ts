@@ -4,6 +4,7 @@ export class Contato {
   nome?: string;
   email?: string;
   favorito?: boolean;
+  foto?: any;
 
   /* CONSTRUTOR COM ATRIBUTOS DE CONTATO */
   constructor(nome: string, email: string) {

@@ -19,7 +19,7 @@ export class ContatoComponent implements OnInit {
   contatos: Contato[] = [];
 
   /* VETOR COM AS COLUNAS DA TABELA DE CONTATOS */
-  colunas = ['id', 'nome', 'email', 'favorito', 'excluir'];
+  colunas = ['foto', 'nome', 'email', 'favorito', 'excluir'];
 
   constructor(
     private service: ContatoService,
@@ -87,6 +87,19 @@ export class ContatoComponent implements OnInit {
       this.service.delete(contato).subscribe(resposta => {
         this.findAll();
       })
+    }
+  }
+
+  /* MÉTODO PARA UPLOAD DA FOTO DO CONTATO */
+  uploadFoto(event: any, contato: Contato) {
+    const files = event.target.files;
+    if (files) {
+      const foto = files[0];
+      const formData: FormData = new FormData();
+      formData.append("foto", foto);
+      this.service.upload(contato, formData).subscribe(response => {
+        this.findAll();
+      });
     }
   }
 
