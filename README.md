@@ -33,4 +33,5 @@ https://material.angular.io/components/categories
 https://angular.io/
 https://materialdesignicons.com/
 
-
+criar novo componente
+ng g c contatoDetalhe -- skip tests
