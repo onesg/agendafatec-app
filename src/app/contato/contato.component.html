@@ -24,10 +24,16 @@
       <!-- INICIO TABELA LISTAR CONTATOS -->
       <table mat-table [dataSource]="contatos" class="full-width">
 
+        <!-- COLUNA FOTO -->
         <ng-container matColumnDef="foto">
           <th mat-header-cell *matHeaderCellDef> Foto </th>
           <td mat-cell *matCellDef="let contato">
-            <input type="file" name="foto" (change)="uploadFoto($event, contato)" />
+            <div *ngIf="contato.foto">
+              <img height="40" src="data:image/png;base64,{{ contato.foto }}" />
+            </div>
+            <div *ngIf="!contato.foto">
+              <input type="file" name="foto" (change)="uploadPicture($event, contato)" />
+            </div>
           </td>
         </ng-container>
 
