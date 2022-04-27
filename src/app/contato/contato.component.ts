@@ -4,6 +4,9 @@ import { Contato } from './contato';
 
 import { FormBuilder, FormGroup, Validators, NgControlStatus } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+
+import { ContatoDetalheComponent } from '../contato-detalhe/contato-detalhe.component';
 
 @Component({
   selector: 'app-contato',
@@ -24,6 +27,7 @@ export class ContatoComponent implements OnInit {
   constructor(
     private service: ContatoService,
     private fb: FormBuilder,
+    private dialog: MatDialog,
     private snackBar: MatSnackBar) { }
 
   /* ASSIM QUE ABRIR A PÁGINA, O "ngOnInit" SERÁ EXECUTADO */
@@ -101,6 +105,14 @@ export class ContatoComponent implements OnInit {
         this.findAll();
       });
     }
+  }
+
+  viewContato(contato: Contato) {
+    this.dialog.open( ContatoDetalheComponent, {
+      width: '500px',
+      height: '500px',
+      data: contato
+    });
   }
 
 }
