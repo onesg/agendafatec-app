@@ -71,10 +71,20 @@ export class ContatoComponent implements OnInit {
   }
 
   /* MÉTODO PARA LISTAR OS CONTATOS */
-  findAll() {
-    this.service.list().subscribe(resposta => {
-      this.contatos = resposta;
+  //findAll() {
+  //  this.service.list().subscribe(resposta => {
+  //    this.contatos = resposta;
+  //  })
+  //}
+
+  /* ALTERACAOOOOOOO */
+  findAll(page: any, size: any) {
+    this.service.list(page, size).subscribe(resposta => {
+      this.contatos = resposta.content!;
+      this.totalElements = resposta.totalElements!;
+      this.page = resposta.number!;
     })
+
   }
 
   /* MÉTODO PARA FAVORITAR CONTATOS */ /* NAO ESTA FUNCIONANDO */
