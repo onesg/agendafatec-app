@@ -28,8 +28,8 @@ export class ContatoComponent implements OnInit {
   /* VARIÁVEIS DE PAGINAÇÃO */
   totalElements: number = 0;
   page: number = 0;
-  size: number = 3;
-  pageSizeOptions: number[] = [3];
+  size: number = 5;
+  pageSizeOptions: number[] = [5];
 
   /* CONTRUTOR */
   constructor(
