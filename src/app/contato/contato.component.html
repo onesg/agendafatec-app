@@ -160,6 +160,13 @@
           <input formControlName="form_telefone" matInput placeholder="Digite o telefone" value="">
         </mat-form-field>
 
+        <!-- VÁLIDAÇÃO DO TELEFONE -->
+        <div *ngIf="formulario.controls.form_telefone.errors && !formulario.controls.form_telefone.pristine">
+          <div *ngIf="formulario.controls.form_telefone.errors.required">
+            Campo telefone é obrigatório!
+          </div>
+        </div>
+
         <!-- BOTAO SALVAR -->
         <button [disabled]="!formulario.valid" mat-raised-button color="primary">Salvar</button>
 
