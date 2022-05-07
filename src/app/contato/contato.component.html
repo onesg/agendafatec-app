@@ -55,7 +55,13 @@
           <td mat-cell *matCellDef="let contato"> {{ contato.email }} </td>
         </ng-container>
 
-        <!-- COLUNA FAVORITO (NAO TA FUNCIONANDO *ARRUMAR) -->
+        <!-- COLUNA TELEFONE -->
+        <ng-container matColumnDef="telefone">
+          <th mat-header-cell *matHeaderCellDef> Telefone </th>
+          <td mat-cell *matCellDef="let contato"> {{ contato.telefone }} </td>
+        </ng-container>
+
+        <!-- COLUNA FAVORITO -->
         <ng-container matColumnDef="favorito">
           <th mat-header-cell *matHeaderCellDef> Favorito </th>
           <td mat-cell *matCellDef="let contato">
@@ -147,6 +153,12 @@
             E-mail é inválido!
           </div>
         </div>
+
+        <!-- CAMPO TELEFONE -->
+        <mat-form-field class="full-width">
+          <mat-label>Telefone</mat-label>
+          <input formControlName="form_telefone" matInput placeholder="Digite o telefone" value="">
+        </mat-form-field>
 
         <!-- BOTAO SALVAR -->
         <button [disabled]="!formulario.valid" mat-raised-button color="primary">Salvar</button>

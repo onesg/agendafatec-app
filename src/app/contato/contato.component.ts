@@ -23,7 +23,7 @@ export class ContatoComponent implements OnInit {
   contatos: Contato[] = [];
 
   /* VETOR COM AS COLUNAS DA TABELA DE CONTATOS */
-  colunas = ['foto', 'nome', 'email', 'favorito', 'excluir'];
+  colunas = ['foto', 'nome', 'email', 'telefone', 'favorito', 'excluir'];
 
   /* VARIÁVEIS DE PAGINAÇÃO */
   totalElements: number = 0;
@@ -53,7 +53,8 @@ export class ContatoComponent implements OnInit {
   createForms() {
     this.formulario = this.fb.group({
       form_nome: ['', Validators.required], /* POR PADRÃO, UM VALOR VAZIO SERÁ PASSADO */
-      form_email: ['', [Validators.required, Validators.email]] /* CAMPO ORBIGATÓRIO E VALIDAÇÃO DE EMAIL */
+      form_email: ['', [Validators.required, Validators.email]], /* CAMPO ORBIGATÓRIO E VALIDAÇÃO DE EMAIL */
+      form_telefone: ['', [Validators.required]],
     });
   }
 
@@ -64,7 +65,7 @@ export class ContatoComponent implements OnInit {
     const formValues = this.formulario.value;
 
     /* CRIANDO OBJETCO C DE CONTATO, INSTANCIANDO E SALVANDO AS INFORMAÇÕES */
-    const c: Contato = new Contato(formValues.form_nome, formValues.form_email);
+    const c: Contato = new Contato(formValues.form_nome, formValues.form_email, formValues.form_telefone);
 
     /* EXECUTANDO O MÉTODO SAVE MANDANDO O OBJETO PREENCHIDO */
     this.service.save(c).subscribe(resposta => {
