@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ContatoDetalheComponent } from '../contato-detalhe/contato-detalhe.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-contato',
@@ -24,6 +25,13 @@ export class ContatoComponent implements OnInit {
   /* VETOR COM AS COLUNAS DA TABELA DE CONTATOS */
   colunas = ['foto', 'nome', 'email', 'favorito', 'excluir'];
 
+  /* VARIÁVEIS DE PAGINAÇÃO */
+  totalElements: number = 0;
+  page: number = 0;
+  size: number = 3;
+  pageSizeOptions: number[] = [3];
+
+  /* CONTRUTOR */
   constructor(
     private service: ContatoService,
     private fb: FormBuilder,
@@ -37,7 +45,7 @@ export class ContatoComponent implements OnInit {
     this.createForms();
 
     /* CHAMANDO MÉTODO findAll */
-    this.findAll();
+    this.findAll(this.page, this.size);
 
   }
 
@@ -70,21 +78,13 @@ export class ContatoComponent implements OnInit {
 
   }
 
-  /* MÉTODO PARA LISTAR OS CONTATOS */
-  //findAll() {
-  //  this.service.list().subscribe(resposta => {
-  //    this.contatos = resposta;
-  //  })
-  //}
-
-  /* ALTERACAOOOOOOO */
+  /* MÉTODO PARA LISTAR OS CONTATOS (JÁ PAGINADOS) */
   findAll(page: any, size: any) {
     this.service.list(page, size).subscribe(resposta => {
       this.contatos = resposta.content!;
       this.totalElements = resposta.totalElements!;
       this.page = resposta.number!;
     })
-
   }
 
   /* MÉTODO PARA FAVORITAR CONTATOS */ /* NAO ESTA FUNCIONANDO */
@@ -99,7 +99,7 @@ export class ContatoComponent implements OnInit {
   delete(contato: Contato) {
     if (window.confirm('Deseja realmente excluir este contato ?')) {
       this.service.delete(contato).subscribe(resposta => {
-        this.findAll();
+        this.findAll(this.page, this.size);
       })
     }
   }
@@ -112,17 +112,24 @@ export class ContatoComponent implements OnInit {
       const formData: FormData = new FormData();
       formData.append("foto", foto);
       this.service.upload(contato, formData).subscribe(response => {
-        this.findAll();
+        this.findAll(this.page, this.size);
       });
     }
   }
 
+  /* MÉTODO PARA VISUALIZAR A FOTO QUANDO CLICAR */
   viewContato(contato: Contato) {
-    this.dialog.open( ContatoDetalheComponent, {
+    this.dialog.open(ContatoDetalheComponent, {
       width: '500px',
       height: '500px',
       data: contato
     });
+  }
+
+  /* MÉTODO PARA PÁGINAR DE ACORDO COM O EVENTO */
+  paginar(event: PageEvent){
+    this.page = event.pageIndex;
+    this.findAll(this.page, this.size);
   }
 
 }

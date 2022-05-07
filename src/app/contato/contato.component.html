@@ -83,6 +83,16 @@
       </table>
       <!-- FIM TABELA LISTAR CONTATOS -->
 
+      <!-- INICIO PAGINAÇÃO -->
+      <mat-paginator
+        [length]="totalElements"
+        [pageSize]="size"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="paginar($event)">
+      </mat-paginator>
+      <!-- FIM PAGINAÇÃO -->
+
+
     </mat-card>
     <!-- FIM CARD LISTA DE CONTATOS -->
 
